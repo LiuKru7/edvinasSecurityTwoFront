@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CarParts} from "./pages/model/car-parts";
 import {Supplier} from "./pages/model/supplier";
+import {CarPartRequest} from "./pages/model/car-part-request";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class CarPartsService {
 
   private carPartApiUrl:string = "http://localhost:8080/api/carparts/user"
   private supplierApiUrl: string = "http://localhost:8080/api/supplier/admin";
+  private carPartApiUrlAdmin:string = "http://localhost:8080/api/carparts/admin"
+
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +29,11 @@ export class CarPartsService {
       headers: this.getAuthHeaders()
     })
   }
+  addNewSupplier(supplier: Supplier):Observable<Supplier> {
+    return this.http.post<Supplier>(`${this.supplierApiUrl}`, supplier, {
+      headers: this.getAuthHeaders()
+    })
+  }
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
@@ -37,5 +45,11 @@ export class CarPartsService {
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  addPart(carPartRequest: CarPartRequest): Observable<any> {
+    return this.http.post<any>(`${this.carPartApiUrlAdmin}`, carPartRequest, {
+      headers: this.getAuthHeaders()
+    })
   }
 }

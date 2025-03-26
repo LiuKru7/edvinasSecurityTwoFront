@@ -12,6 +12,9 @@ export class LoginComponent {
   password: string = "";
   errorMessage: string = "";
 
+  usernameRegistration: string = "";
+  passwordRegistration: string = "";
+
   constructor(private http: HttpClient, private router: Router) {
 
   }
@@ -40,4 +43,21 @@ export class LoginComponent {
       });
   }
 
+  register() {
+    const credentials = {
+      username: this.usernameRegistration,
+      password: this.passwordRegistration,
+    };
+
+    this.http.post('http://localhost:8080/api/auth/register', credentials, { responseType: 'text' })
+      .subscribe({
+        next: (response: string) => {
+          console.log(response);
+
+        },
+        error: (error) => {
+          console.error('Registration error', error);
+        }
+      });
+  }
 }

@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { AddSupplierComponent } from './pages/add-supplier/add-supplier.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AddCarPartComponent } from './pages/add-car-part/add-car-part.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './components/header/header.component';
     CarPartsComponent,
     SuppliersComponent,
     AddSupplierComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddCarPartComponent
   ],
   imports: [
     BrowserModule,

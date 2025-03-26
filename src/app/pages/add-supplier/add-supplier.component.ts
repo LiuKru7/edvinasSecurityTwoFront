@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Supplier} from "../model/supplier";
 import {CarPartsService} from "../../car-parts.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-supplier',
@@ -14,12 +15,15 @@ export class AddSupplierComponent {
     address: ""
   }
 
-  constructor(private service: CarPartsService) {
+  constructor(private service: CarPartsService, private router: Router) {
   }
 
-
   addSupplier() {
-
-
+    this.service.addNewSupplier(this.supplier).subscribe({
+      next: (result) => {
+        this.router.navigate(['/suppliers'])
+      }
+    }
+    )
   }
 }
